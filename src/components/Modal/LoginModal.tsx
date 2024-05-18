@@ -1,32 +1,51 @@
 'use client'
 
 import { useCallback, useState } from 'react'
+import { signIn } from 'next-auth/react'
 
 import useLoginModal from '@/hooks/useLoginModal'
+import useRegisterModal from '@/hooks/useRegisterModal'
 
 import { Input } from '../Input'
-import { Modal } from '../Modal'
-import useRegisterModal from '@/hooks/useRegisterModal'
+import { Modal } from './index'
+
+import toast from 'react-hot-toast'
 
 export function LoginModal() {
   const loginModal = useLoginModal()
   const registerModal = useRegisterModal()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('bruno.silva@gmail.com')
+  const [password, setPassword] = useState('Snapdrag0n')
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true)
 
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: true
+      })
+
+      if (result?.error) {
+        throw new Error(result.error)
+      }
+
+      toast.success('Logado com sucesso!', {
+        duration: 4000,
+        position: 'top-right'
+      })
+
       loginModal.onClose()
     } catch (error) {
+      toast.error('Falha ao logar!')
       console.log(error)
     } finally {
       setIsLoading(false)
     }
-  }, [loginModal])
+  }, [loginModal, email, password])
 
   const onToogle = useCallback(() => {
     if (isLoading) return
@@ -46,6 +65,7 @@ export function LoginModal() {
 
       <Input
         placeholder='Password'
+        type='password'
         onChange={e => setPassword(e.target.value)}
         value={password}
         disabled={isLoading}

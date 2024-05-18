@@ -22,11 +22,6 @@ export function Button({
       disabled={disabled}
       onClick={onClick}
       className={`
-      rounded-full
-      border-2
-      font-semibold
-      transition
-      hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-70
       ${fullWidth ? 'w-full' : 'w-fit'}
       ${secondary ? 'bg-white' : 'bg-sky-500'}
       ${secondary ? 'text-black' : 'text-white'}
@@ -37,6 +32,11 @@ export function Button({
       ${outlined && 'bg-transparent'}
       ${outlined && 'border-white'}
       ${outlined && 'text-white'}
+      rounded-full
+      border-2
+      font-semibold
+      transition
+      hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-70
       `}
     >
       {label}

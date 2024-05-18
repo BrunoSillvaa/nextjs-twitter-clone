@@ -1,11 +1,10 @@
 'use client'
 
 import useLoginModal from '@/hooks/useLoginModal'
-import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { FaFeather } from 'react-icons/fa'
 
-export function TweetButton() {
+export function SidebarTweetButton() {
   const loginModal = useLoginModal()
 
   const onClick = useCallback(() => {
