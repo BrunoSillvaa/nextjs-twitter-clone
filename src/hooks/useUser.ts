@@ -2,9 +2,15 @@ import useSWR from 'swr'
 import fetcher from '@/libs/fetcher'
 
 const useUser = (userId: string) => {
+  const url = userId ? `/api/users/${userId}` : null
+
   const { data, error, isLoading, mutate } = useSWR(
-    userId ? `/api/users/${userId}` : null,
-    fetcher
+    url,
+    fetcher,
+    {
+      refreshInterval: 0,
+      revalidateOnFocus: false
+    }
   )
 
   return {

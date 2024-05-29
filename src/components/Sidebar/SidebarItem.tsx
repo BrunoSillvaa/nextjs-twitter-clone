@@ -6,6 +6,11 @@ import { useRouter } from 'next/navigation'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import useLoginModal from '@/hooks/useLoginModal'
 
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap'
+})
+
 interface SidebarItemProps {
   href: string
   label: string
@@ -13,11 +18,6 @@ interface SidebarItemProps {
   auth?: boolean
   onClick?: () => void
 }
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap'
-})
 
 export function SidebarItem({
   href,

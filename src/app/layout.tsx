@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { Toaster } from 'react-hot-toast'
 
+import { Layout } from '@/components/Layout'
 import { RegisterModal } from '@/components/Modal/RegisterModal'
 import { LoginModal } from '@/components/Modal/LoginModal'
-import { Layout } from '@/components/Layout'
+import { EditModal } from '@/components/Modal/EditModal'
 import '../styles/globals.css'
 
-import NextAuthSessionProvider from '@/providers/sessionProvider'
 import SWRProvider from '@/providers/swrProvider'
 
 export const metadata: Metadata = {
@@ -23,14 +23,13 @@ export default function RootLayout({
   return (
     <html lang='pt-BR'>
       <body className='h-screen bg-black'>
-        {/* <NextAuthSessionProvider> */}
           <SWRProvider>
             <Toaster />
             <LoginModal />
             <RegisterModal />
+            <EditModal />
             <Layout>{children}</Layout>
           </SWRProvider>
-        {/* </NextAuthSessionProvider> */}
       </body>
     </html>
   )

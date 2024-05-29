@@ -29,7 +29,7 @@ export function Sidebar() {
     },
     {
       label: 'Profile',
-      href: `/users/12`,
+      href: `/users/${currentUser?.id}`,
       icon: FaUser,
       auth: true
     }

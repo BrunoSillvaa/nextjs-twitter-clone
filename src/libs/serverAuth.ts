@@ -6,7 +6,9 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 const serverAuth = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session?.user?.email) throw new Error('Not signed in')
+  // console.log('Sessao: ' + JSON.stringify(session))
+
+  if (!session?.user?.email) return null
 
   const currentUser = await prisma.user.findUnique({
     where: {
@@ -14,7 +16,7 @@ const serverAuth = async () => {
     }
   })
 
-  if (!currentUser) throw new Error('Not signed in')
+  if (!currentUser) return null
 
   return currentUser
 }

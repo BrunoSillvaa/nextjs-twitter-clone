@@ -1,5 +1,5 @@
-import serverAuth from '@/libs/serverAuth';
-import { NextResponse } from 'next/server';
+import serverAuth from '@/libs/serverAuth'
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
@@ -7,10 +7,11 @@ export async function GET() {
 
     if (!currentUser) throw new Error('Nenhum usuario logado')
 
-    // console.log('Current User: ' + JSON.stringify(currentUser))
-
     return NextResponse.json(currentUser, { status: 200 })
   } catch (error) {
-    return NextResponse.json(error, { status: 400 })
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 400 }
+    )
   }
 }
